@@ -27,7 +27,7 @@ The data in the dataframe GSSdata is from the 2018 General Social Survey. The fi
 First question - Is opinion on the death penalty (CAPPUN) independent of gun ownership (OWNGUN)?
 
 $H_0$: Opinion on capital punishment is independent of gun ownership
-$H_A$: Opinion on ....
+$H_A$: Opinion on capital punishment is dependent on gun ownership.
 
 ## Methods
 
@@ -67,9 +67,21 @@ rowPerc(table1)
 colPerc(table1)
 ```
 
+numerical summary shows that 75% of gun owners favor CAPPUN
+
 ### Inferential Results
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
+
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+
+The Chi~squared test p-value is 0.0202, hence we concluded that gun ownership and capital punishment are not independent.   
+
+The fisherexact test has a p-value of .01651 hence we reject the null hypothesis, as with the chi-square test, and furthermore the odds ratio says that gunowners are 2.3 times more likely to favor capital punishment than those who don't own a gun.  
 
 #  Question 2
 
