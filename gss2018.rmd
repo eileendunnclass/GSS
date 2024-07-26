@@ -117,7 +117,7 @@ Num ~ Cat
 plot(EDUC~VOTE12,data=GSSdata)
 ```
 
-This boxplot shows that the people who voted in 2012 tend to have a higher education
+This boxplot shows that the people who voted in 2012 tend to have a higher education.  
 
 #### Numerical Descriptive Results
 
@@ -128,15 +128,17 @@ This boxplot shows that the people who voted in 2012 tend to have a higher educa
 favstats(EDUC~VOTE12,data=GSSdata)
 ```
 
+The Numerical shows that in 2012 those who did vote have almost 16 years in education. Those who did not vote in 2012 have little over 13 years of education.  
+
 ### Inferential Results
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
 
 ```{r}
-chisq.test(table1)
-chisqtestGC(table1)
-fisher.test(table1)
+t.test(EDUC~VOTE12,data=GSSdata)
 ```
+
+This T tests shows that this means that those who voted in better education.  
 
 #  Question 3
 
@@ -144,9 +146,16 @@ fisher.test(table1)
 
 Determine if a persons performance on the wordsum test (WORDSUM) is independent of their level of schooling (DEGREE).
 
+$H_0$: The score of a persons (WORDSUM) test is independent of their level of schooling (DEGREE)  
+$H_A$: The score of a persons (WORDSUM) test is dependent of their level of schooling (DEGREE)  
+
 ## Methods
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method.!-->
+
+WORDSUM is a numerical variable,
+DEGREE is a categorical variable,
+so I use Num~Cat data file
 
 ##Results
 
@@ -180,13 +189,30 @@ colPerc(table1)
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
 
 ```{r}
-chisq.test(table1)
-chisqtestGC(table1)
-fisher.test(table1)
+anova=aov(WORDSUM~DEGREE,data=GSSdata)
+summary(anova)
 ```
+
+
+This shows that we reject the null because the p-value is 0.0000002 which is smaller than .05
+
+```{r}
+plot(TukeyHSD(anova))
+```
+
+there is no differnce between highschool and less than highschool. 
+there is a difference between Jr college and highschool.
+there is a difference with bachelors and highschool
+there is a difference between graduate and highschool
+No difference between highschool and graduate
+No difference between Jr college and graduate
+No difference between bachelors and graduate
+
 
 # Discussion and Conclusion
 
 <!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variavbles causes the other, or whether they perhasps are related for some other reason.  Watch the chapter 6 videos from the GeorgeTown videos collection.!-->
+
+There is a relationship in all categories.
 
 #### Question 1: is gun ownership independent of opinion on capital punishment. The summary results and the inferential results show that they are not independent.
